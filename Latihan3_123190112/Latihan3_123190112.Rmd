@@ -1,0 +1,44 @@
+---
+title: "Latihan3_123190112"
+author: "Ardlyansyah"
+date: "9/29/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Dapat diketahui bahwa dataset “murders” terdiri dari 51 baris yang berarti 51 negara. Data berisi Nama negara bagian, singkatan dari nama negara bagian, wilayah negara bagian, dan populasi negara bagian serta jumlah total pembunuhan. 
+```{r echo=FALSE}
+library(dslabs)
+data(murders)
+str(murders)
+```
+
+2. Dapat diketahui bahwa dataset “murders” memiliki nama kolom state, abb, region, population, dan total.
+
+```{r echo=FALSE}
+names(murders)
+```
+
+3. jenis class dari objek a adalah : 
+
+```{r echo=FALSE}
+a <- murders$abb
+class(a)
+```
+4. variabel “a” dan “b” bernilai sama
+```{r echo=FALSE}
+b <- murders$abb[]
+a==b
+```
+5. jumlah region yang dimiliki dataset
+```{r echo=FALSE}
+length(levels(murders$region))
+```
+6. jumlah state pada tiap region
+
+```{r echo=FALSE}
+table(murders$region)
+```

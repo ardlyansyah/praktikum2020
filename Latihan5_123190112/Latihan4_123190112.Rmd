@@ -1,0 +1,85 @@
+---
+title: "Latihan4_123190112"
+author: "Ardlyansyah"
+date: "10/6/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE}
+library(dslabs)
+data(murders)
+```
+## Latihan
+1. Gunakan operator aksesor ($) untuk mengakses variabel populasi dan menyimpannya pada
+objek baru “pop”. Kemudian gunakan fungsi sort untuk mengurutkan variabel “pop”. Pada
+langkah terakhir, gunakan operator ([) untuk menampilkan nilai populasi terkecil. 
+
+```{r echo=FALSE}
+pop <- murders$population
+sort(pop)[1]
+
+```
+
+2. Tampilkan indeks dari data yang memiliki nilai populasi terkecil.
+Petunjuk: gunakan fungsi order.
+```{r echo=FALSE}
+nilaiMin = order(murders$population)
+nilaiMin[1]
+```
+
+3. Dengan fungsi which.min, Tulis satu baris kode yang dapat menampilkan hasil yang sama
+dengan langkah diatas.
+```{r echo=FALSE}
+which.min(murders$population)
+```
+
+4. Tampilkan nama negara yang memiliki populasi terkecil.
+```{r echo=FALSE}
+i_min <- which.min(murders$population)
+murders$state[i_min] 
+```
+5. Gunakan fungsi rank untuk menentukan peringkat populasi dari tiap negara bagian, dimulai
+dari nilai terkecil hingga terbesar. Simpan hasil pemeringkatan di objek baru “ranks”, lalu buat
+data frame baru yang berisi nama negara bagian dan peringkatnya dengan nama “my_df”. 
+```{r echo=FALSE}
+ranks = rank(murders$population)
+my_df = data.frame(state = murders$state, rank = ranks)
+my_df
+```
+
+6. Ulangi langkah sebelumnya, namun kali ini urutkan my_df dengan fungsi order agar data
+yang ditampilkan merupakan data yang telah diurutkan dari populasi yang paling tidak padat
+hingga ke yang terpadat.
+Petunjuk: buat objek “ind” yang akan menyimpan indeks yang diperlukan dalam mengurutkan
+data populasi. 
+```{r echo=FALSE}
+ind = order(murders$population)
+ranks = rank(murders$population)
+my_df = data.frame(state = murders$state[ind], rank = ranks[ind])
+my_df
+
+```
+
+7. Perlu diingat bahwa beberapa negara bagian memiliki populasi di bawah 5 juta, sehingga
+untuk mempermudah analisis, buat plot dalam skala log. Transformasi nilai variabel
+menggunakan transformasi log10,kemudian tampilkan plot-nya. 
+```{r echo=FALSE}
+population <- log10(murders$population)
+total_murders <- murders$total
+plot(population, total_murders) 
+
+```
+8. Buat histogram dari populasi negara bagian.
+```{r echo=FALSE}
+hist(murders$population)
+
+```
+9. Hasilkan boxplot dari populasi negara bagian berdasarkan wilayahnya. 
+```{r echo=FALSE}
+boxplot(population~region, data = murders)
+
+```
